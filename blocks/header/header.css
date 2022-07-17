@@ -1,12 +1,11 @@
 .header {
-    width: calc(100% - 200px);
-    margin: 0 auto;
+    width: calc(100% - 2 * 200px);
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
-@media screen and (max-width: 568px){
+@media screen and (max-width: 1040px){
     .header {
         width: 100%;
     }

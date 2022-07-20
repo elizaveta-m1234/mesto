@@ -13,4 +13,4 @@
 Сверстана с помощью html и CSS, используется язык JavaScript, для просмотра необходим браузер.
 
 **Ссылка на проект**
-[Ссылка на проект в GitHub Pages]()
+[Ссылка на проект в GitHub Pages](https://elizaveta-m1234.github.io/mesto/)

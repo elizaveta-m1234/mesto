@@ -1,4 +1,4 @@
-.popup__save {
+.submit-btn {
     width: 100%;
     min-height: 50px;
     background-color: #000;
@@ -13,12 +13,12 @@
     border: none;
 }
 
-.popup__save:hover {
+.submit-btn:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
 @media screen and (max-width: 568px) {
-    .popup__save {
+    .submit-btn {
         min-height: 46px;
         font-size: 14px;
         line-height: 17px;

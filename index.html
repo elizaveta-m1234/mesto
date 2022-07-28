@@ -40,9 +40,9 @@
 
   <div class="popup popup_type_profile">
     <div class="popup__content">
-      <button class="popup__close popup_type_profile__close button" aria-label="Закрыть" type="button"></button>
+      <button class="popup__close popup__close_profile button" aria-label="Закрыть" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form_function_edit" name="profile">
+      <form class="popup__form popup__form_edit" name="profile">
         <input class="popup__input popup__input_type_name" name="name">
         <input class="popup__input popup__input_type_occupation" name="occupation">
         <button class="popup__save submit-btn" type="submit">Сохранить</button>
@@ -52,9 +52,9 @@
 
   <div class="popup popup_type_entry">
     <div class="popup__content">
-      <button class="popup__close popup_type_entry__close button" aria-label="Закрыть" type="button"></button>
+      <button class="popup__close popup__close_entry button" aria-label="Закрыть" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__form_function_create" name="entry">
+      <form class="popup__form popup__form_create" name="entry">
         <input class="popup__input popup__input_type_place" name="place" placeholder="Название">
         <input class="popup__input popup__input_type_link" name="link" placeholder="Ссылка на картинку">
         <button class="popup__create submit-btn" type="submit">Создать</button>
@@ -64,7 +64,7 @@
 
   <div class="popup popup_type_picture">
     <div class="popup__container">
-      <button class="popup__close popup_type_picture__close button" aria-label="Закрыть" type="button"></button>
+      <button class="popup__close popup__close_picture button" aria-label="Закрыть" type="button"></button>
       <img src="#" class="popup__picture" alt="Название места">
       <h2 class="popup__caption">Название места</h2>
     </div>

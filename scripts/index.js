@@ -30,7 +30,7 @@ const selectors = {
   popup: '.popup',
   /*Селекторы для попапа Profile*/
   popupEdit: '.popup_type_profile',
-  closeEdit: '.popup_type_profile__close',
+  closeEdit: '.popup__close_profile',
   edit: '.profile__edit-button',
   save: '.popup__save',
   nameInput: '.popup__input_type_name',
@@ -38,12 +38,12 @@ const selectors = {
   profile: '.profile',
   pName: '.profile__name',
   pJob: '.profile__occupation',
-  formEdit: '.popup__form_function_edit',
+  formEdit: '.popup__form_edit',
   /*Селекторы для попапа Entry*/
   popupAdd: '.popup_type_entry',
-  closeAdd: '.popup_type_entry__close',
+  closeAdd: '.popup__close_entry',
   add: '.profile__add-button',
-  formAdd: '.popup__form_function_create',
+  formAdd: '.popup__form_create',
   placeInput: '.popup__input_type_place',
   linkInput: '.popup__input_type_link',
   create: '.popup__create',
@@ -58,7 +58,7 @@ const selectors = {
   picturePopup: '.popup_type_picture',
   picture: '.popup__picture',
   caption: '.popup__caption',
-  closePicture: '.popup_type_picture__close'
+  closePicture: '.popup__close_picture'
 }
 
 const popupElement = document.querySelector(selectors.popup);

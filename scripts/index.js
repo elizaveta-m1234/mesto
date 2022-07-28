@@ -108,39 +108,42 @@ popupEditButtonElement.addEventListener('click', () => {
 
 popupEditCloseButtonElement.addEventListener('click', () => closePopup (popupEditElement));
 
-function formSubmitHandler (evt) {
+function editProfileContent(evt) {
     evt.preventDefault();
     profileNameElement.textContent = nameInput.value;
     profileJobElement.textContent = jobInput.value;
     closePopup(popupEditElement);
 }
 
-formEditElement.addEventListener('submit', formSubmitHandler);
+formEditElement.addEventListener('submit', editProfileContent);
 
 /*Интерактивность попапа Entry*/
-popupAddButtonElement.addEventListener('click', () => openPopup(popupAddElement));
+popupAddButtonElement.addEventListener('click', () => {
+  openPopup(popupAddElement);
+  formAddElement.reset();
+});
+
 popupAddCloseButtonElement.addEventListener('click', () => closePopup(popupAddElement));
 
 /*Создаем карточку*/
 function createCard(element) {
   const cardElement = cardTemplateElement.cloneNode(true);
-  cardElement.querySelector(selectors.cardImage).src = element.link;
-  cardElement.querySelector(selectors.cardImage).alt = element.name;
+  const cardImageElement = cardElement.querySelector(selectors.cardImage);
+  cardImageElement.src = element.link;
+  cardImageElement.alt = element.name;
   cardElement.querySelector(selectors.cardPlace).textContent = element.name;
 
   /*Интерактивность попапа Picture*/
-  cardElement.querySelector(selectors.cardImage).addEventListener('click', function () {
+  cardImageElement.addEventListener('click', function () {
     openPopup(popupPictureElement);
     popupFullPictureElement.src = element.link;
     popupFullPictureElement.alt = element.name;
     popupCaptionElement.textContent = element.name;
   });
-
-  popupPictureCloseButtonElement.addEventListener('click', () => closePopup (popupPictureElement));
   /*Интерактивность попапа Picture - конец*/
 
   /*Лайк*/
-  cardElement.querySelector(selectors.like).addEventListener('click', function (evt) {
+  cardElement.querySelector(selectors.like).addEventListener('click', function(evt) {
     evt.target.classList.toggle('element__like_active');
   })
 
@@ -152,19 +155,21 @@ function createCard(element) {
   return(cardElement);
 };
 
+popupPictureCloseButtonElement.addEventListener('click', () => closePopup (popupPictureElement));
+
 /*Функция вставки карточки*/
 function renderCard(cardElement) {
   listElement.prepend(createCard(cardElement));
 };
 
 /*Создаем начальные 6 карточек*/
-function CreateInitialCards() {
+function createInitialCards() {
     initialCards.forEach(function (cardElement) {
         renderCard(cardElement);
     });
 };
 
-CreateInitialCards();
+createInitialCards();
 
 /*Добавление новой карточки*/
 function addNewCard(evt) {
@@ -176,5 +181,3 @@ function addNewCard(evt) {
 }
 
 formAddElement.addEventListener('submit', addNewCard);
-
-/*Интерактивность попапа Picture*/

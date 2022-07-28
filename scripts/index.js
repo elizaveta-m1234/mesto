@@ -52,6 +52,8 @@ const selectors = {
   listItem: '.element',
   cardImage: '.element__image',
   cardPlace: '.element__place',
+  delete: '.element__delete',
+  like: '.element__like',
   /*Селекторы для попапа Picture*/
   picturePopup: '.popup_type_picture',
   picture: '.popup__picture',
@@ -86,8 +88,6 @@ const popupPictureElement = document.querySelector(selectors.picturePopup);
 const popupFullPictureElement = popupPictureElement.querySelector(selectors.picture);
 const popupCaptionElement = popupPictureElement.querySelector(selectors.caption);
 const popupPictureCloseButtonElement = popupPictureElement.querySelector(selectors.closePicture);
-
-
 
 /*Общая функция открытия попапов*/
 function openPopup(pop) {
@@ -138,6 +138,16 @@ function createCard(element) {
 
   popupPictureCloseButtonElement.addEventListener('click', () => closePopup (popupPictureElement));
   /*Интерактивность попапа Picture - конец*/
+
+  /*Лайк*/
+  cardElement.querySelector(selectors.like).addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__like_active');
+  })
+
+  /*Удаление*/
+  cardElement.querySelector(selectors.delete).addEventListener('click', function(evt) {
+    evt.target.closest(selectors.listItem).remove();
+  });
 
   return(cardElement);
 };

@@ -1,4 +1,4 @@
-const obj = {
+const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.submit-btn',
@@ -6,9 +6,9 @@ const obj = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 } 
-/*Параметр settings явлется формальным параметром функций и используется при их объявлении. Объект obj является фактическим параметром функции enableValidation,
+/*Параметр settings явлется формальным параметром функций и используется при их объявлении. Объект validationConfig является фактическим параметром функции enableValidation,
 и передается непосредственно при вызове ей и остальныv функциям, которые вызывает она. Все селекторы и классы в коде берутся из объекта. Все значения селекторов и классов
-прописаны в соответствии с разметкой страницы в index.html*/
+прописаны в соответствии с разметкой страницы в index.html. Наставник посоветовал переименовать объект, больше проблем не нашел.*/
 
 const showInputError = (formElement, inputElement, errorMessage, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -105,4 +105,4 @@ const disableSubmitButton = (settings) => {
   });
 }
 
-enableValidation(obj);
+enableValidation(validationConfig);

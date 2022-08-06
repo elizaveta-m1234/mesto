@@ -121,8 +121,8 @@ popupElements.forEach(item =>
 /*Интерактивность попапа Profile*/
 popupEditButtonElement.addEventListener('click', () => {
   openPopup(popupEditElement);
-  hidePopupErrors(obj);
-  enableSubmitButton(obj);
+  hidePopupErrors(validationConfig);
+  enableSubmitButton(validationConfig);
   nameInput.value = profileNameElement.textContent;
   jobInput.value = profileJobElement.textContent;
 });
@@ -142,8 +142,8 @@ formEditElement.addEventListener('submit', editProfileContent);
 popupAddButtonElement.addEventListener('click', () => {
   openPopup(popupAddElement);
   formAddElement.reset();
-  hidePopupErrors(obj);
-  disableSubmitButton(obj);
+  hidePopupErrors(validationConfig);
+  disableSubmitButton(validationConfig);
 });
 
 popupAddCloseButtonElement.addEventListener('click', () => closePopup(popupAddElement));

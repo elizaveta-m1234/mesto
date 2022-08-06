@@ -62,7 +62,6 @@ const selectors = {
   closePicture: '.popup__close_picture'
 }
 
-const popupElement = document.querySelector(selectors.popup);
 const popupElements = document.querySelectorAll(selectors.popup);
 /*Константы попапа Profile*/
 const popupEditElement = document.querySelector(selectors.popupEdit);

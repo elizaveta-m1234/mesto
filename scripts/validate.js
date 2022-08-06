@@ -6,6 +6,9 @@ const obj = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 } 
+/*Параметр settings явлется формальным параметром функций и используется при их объявлении. Объект obj является фактическим параметром функции enableValidation,
+и передается непосредственно при вызове ей и остальныv функциям, которые вызывает она. Все селекторы и классы в коде берутся из объекта. Все значения селекторов и классов
+прописаны в соответствии с разметкой страницы в index.html*/
 
 const showInputError = (formElement, inputElement, errorMessage, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -35,13 +38,21 @@ const hasInvalidInput = (inputList) => {
 });
 };
 
+const disableButton = (buttonElement, settings) => {
+  buttonElement.classList.add(settings.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', true);
+}
+
+const enableButton = (buttonElement, settings) => {
+  buttonElement.classList.remove(settings.inactiveButtonClass);
+  buttonElement.removeAttribute('disabled');
+}
+
 const toggleButtonState = (inputList, buttonElement, settings) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(settings.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
-} else {
-    buttonElement.classList.remove(settings.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled');
+    disableButton(buttonElement, settings);
+  } else {
+    enableButton(buttonElement, settings);
   }
 }
 
@@ -73,10 +84,7 @@ const hidePopupErrors = (settings) => {
   formList.forEach((formElement) => {
     const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
     inputList.forEach((inputElement) => {
-      const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-      errorElement.classList.remove(settings.errorClass);
-      errorElement.textContent = '';
-      inputElement.classList.remove(settings.inputErrorClass);
+      hideInputError(formElement, inputElement, settings);
     })
   })
 }
@@ -85,8 +93,7 @@ const enableSubmitButton = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach((formElement) => {
     const buttonElement = formElement.querySelector(settings.submitButtonSelector);
-    buttonElement.classList.remove(settings.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled');
+    enableButton(buttonElement, settings);
   });
 }
 
@@ -94,8 +101,7 @@ const disableSubmitButton = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach((formElement) => {
     const buttonElement = formElement.querySelector(settings.submitButtonSelector);
-    buttonElement.classList.add(settings.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
+    disableButton(buttonElement, settings);
   });
 }
 

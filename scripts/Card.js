@@ -15,32 +15,34 @@ export class Card {
         
     // вернём DOM-элемент карточки
     return cardElement;
-    }
+  }
 
-    generateCard() {
-      this._element = this._getCard();
+  generateCard() {
+    this._element = this._getCard();
 
-      const cardImage = this._element.querySelector('.element__image');
-      const cardPlace = this._element.querySelector('.element__place');
-      const cardLike = this._element.querySelector('.element__like');
-      const cardDelete = this._element.querySelector('.element__delete');
+    this._cardImage = this._element.querySelector('.element__image');
+    this._cardPlace = this._element.querySelector('.element__place');
+    this._cardLike = this._element.querySelector('.element__like');
+    this._cardDelete = this._element.querySelector('.element__delete');
 
-      cardPlace.textContent = this._name;
-      cardImage.src = this._link;
-      cardImage.alt = this.name;
+    this._cardPlace.textContent = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this.name;
 
-      cardLike.addEventListener('click', this._likeCard);
-      cardDelete.addEventListener('click', this._deleteCard);
-      cardImage.addEventListener('click', this._handleCardClick(this._name, this._link));
+    this._cardLike.addEventListener('click', () => this._likeCard());
+    this._cardDelete.addEventListener('click', () => this._deleteCard());
+    this._cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
 
-      return this._element;
-    }
+    return this._element;
+  }
 
-    _likeCard(evt) {
-      evt.target.classList.toggle('element__like_active');
-    }
+  _likeCard() {
+    this._element.querySelector('.element__like').
+    classList.toggle('element__like_active');
+  }
 
-    _deleteCard(evt) {
-      evt.target.closest('.element').remove();
-    }
+  _deleteCard() {
+    this._element.remove();
+    this._element = null;
+  }
 }

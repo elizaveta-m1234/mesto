@@ -137,9 +137,9 @@ popupElements.forEach(item =>
 /*Интерактивность попапа Profile*/
 popupEditButtonElement.addEventListener('click', () => {
   openPopup(popupEditElement);
-  editFormValidator.enableButton;
   nameInput.value = profileNameElement.textContent;
   jobInput.value = profileJobElement.textContent;
+  editFormValidator.resetValidation();
 });
 
 popupEditCloseButtonElement.addEventListener('click', () => closePopup(popupEditElement));
@@ -157,7 +157,7 @@ formEditElement.addEventListener('submit', editProfileContent);
 popupAddButtonElement.addEventListener('click', () => {
   openPopup(popupAddElement);
   formAddElement.reset();
-  addFormValidator.disableButton;
+  addFormValidator.resetValidation();
 });
 
 popupAddCloseButtonElement.addEventListener('click', () => closePopup(popupAddElement));
@@ -172,11 +172,16 @@ const handleCardClick = (name, link) => {
 
 popupPictureCloseButtonElement.addEventListener('click', () => closePopup (popupPictureElement));
 
-/*Функция вставки карточки*/
-function renderCard(item) {
+/*Функция создания карточки*/
+function createCard(item) {
   const card = new Card(item.name, item.link, '.card', handleCardClick);
   const cardElement = card.generateCard();
-  listElement.prepend(cardElement);
+  return cardElement;
+}
+
+/*Функция вставки карточки*/
+function renderCard(cardElement) {
+  listElement.prepend(createCard(cardElement));
 }
 
 /*Создаем начальные 6 карточек*/

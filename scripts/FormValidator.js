@@ -66,7 +66,14 @@ export class FormValidator {
       })
     }
 
-    enableValidation = () => {
-      this._setEventListeners();
-    }
+  enableValidation = () => {
+    this._setEventListeners();
+  }
+
+  resetValidation() {
+    this._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
+  } 
 }

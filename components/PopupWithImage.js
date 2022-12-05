@@ -8,10 +8,10 @@ export class PopupWithImage extends Popup {
   }
 
   //перезаписываем метод open, используя старую функцию открытия картинки
-  open(name, link) {
+  open(place, link) {
     super.open();
     this._picture.src = link;
-    this._picture.alt = name;
-    this._caption.textContent = name;
+    this._picture.alt = place;
+    this._caption.textContent = place;
   }
 }

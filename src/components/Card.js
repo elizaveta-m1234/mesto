@@ -18,6 +18,12 @@ export class Card {
     return cardElement;
   }
 
+  _setEventListeners() {
+    this._cardLike.addEventListener('click', () => this._likeCard());
+    this._cardDelete.addEventListener('click', () => this._deleteCard());
+    this._cardImage.addEventListener('click', () => this._handleCardClick(this._place, this._link));
+  }
+
   generateCard() {
     this._element = this._getCard();
 
@@ -30,16 +36,13 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._place;
 
-    this._cardLike.addEventListener('click', () => this._likeCard());
-    this._cardDelete.addEventListener('click', () => this._deleteCard());
-    this._cardImage.addEventListener('click', () => this._handleCardClick(this._place, this._link));
+    this._setEventListeners();
 
     return this._element;
   }
 
   _likeCard() {
-    this._element.querySelector('.element__like').
-    classList.toggle('element__like_active');
+    this._cardLike.classList.toggle('element__like_active');
   }
 
   _deleteCard() {

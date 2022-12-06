@@ -76,8 +76,9 @@ popupProfile.setEventListeners();
 /*Интерактивность попапа Profile (меняем с учетом класса UserInfo)*/
 popupEditButtonElement.addEventListener('click', () => {
   popupProfile.open();
-  nameInput.value = userProfile.getUserInfo().name;
-  jobInput.value = userProfile.getUserInfo().occupation;
+  const info = userProfile.getUserInfo();
+  nameInput.value = info.name;
+  jobInput.value = info.occupation; 
   editFormValidator.resetValidation();
 });
 

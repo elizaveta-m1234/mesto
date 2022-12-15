@@ -7,6 +7,7 @@ export class PopupWithForm extends Popup {
     //формы и инпуты
     this._form = this._popup.querySelector('.popup__form');
     this._inputList = this._form.querySelectorAll('.popup__input');
+    this._submitBtn = this._form.querySelector('.submit-btn')
   }
 
   //собирает данные всех полей формы
@@ -39,5 +40,14 @@ export class PopupWithForm extends Popup {
   close() {
     this._form.reset();
     super.close();
+  }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitBtn.textContent = 'Сохранение...'
+      //console.log('Сохранение...') -- не успеваю увидеть изменение кнопки, пусть будет для теста
+    } else {
+      this._submitBtn.textContent = 'Сохранить'
+    }
   }
 }

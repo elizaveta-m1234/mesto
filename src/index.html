@@ -16,13 +16,15 @@
     <section class="profile page__profile">
       <div class="profile__data">
         <div class="profile__avatar-place">
-          <img class="profile__avatar" src="<%=require('./images/cousteau.jpg')%>" alt="Жак-Ив Кусто">
-          <img class="profile__hover" src="<%=require('./images/edit_avatar.svg')%>">
+          <button class="profile__avatar-btn" aria-label="Изменить">
+            <img class="profile__avatar" src="" alt="Аватар">
+            <img class="profile__hover" src="<%=require('./images/edit_avatar.svg')%>">
+          </button>
         </div>
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name"></h1>
           <button class="profile__edit-button button" aria-label="Изменить" type="button"></button>
-          <p class="profile__occupation">Исследователь океана</p>
+          <p class="profile__occupation"></p>
         </div>
       </div>
       <button class="profile__add-button button" aria-label="Добавить" type="button"></button>
@@ -48,7 +50,7 @@
         <fieldset class="popup__set">
           <input class="popup__input popup__input_type_name" id="input-name" name="name" type="text" required minlength="2" maxlength="40">
           <span class="popup__error input-name-error"></span>
-          <input class="popup__input popup__input_type_occupation" id="input-occupation" name="occupation" type="text" required minlength="2" maxlength="200">
+          <input class="popup__input popup__input_type_occupation" id="input-occupation" name="about" type="text" required minlength="2" maxlength="200">
           <span class="popup__error input-occupation-error"></span>
           <button class="popup__save submit-btn" type="submit">Сохранить</button>
         </fieldset>
@@ -81,7 +83,7 @@
           <input class="popup__input popup__input_type_link" id="input-link" name="link" placeholder="Ссылка на картинку"
             type="url" required>
           <span class="popup__error input-link-error"></span>
-          <button class="popup__create submit-btn" type="submit">Сохранить</button>
+          <button class="popup__submit submit-btn" type="submit">Сохранить</button>
         </fieldset>
       </form>
     </div>
@@ -91,7 +93,9 @@
     <div class="popup__content">
       <button class="popup__close popup__close_delete button" aria-label="Закрыть" type="button"></button>
       <h2 class="popup__title">Вы уверены?</h2>
-      <button class="popup__create submit-btn" type="submit">Да</button>
+      <form class="popup__form">
+        <button class="popup__confirm submit-btn" type="submit">Да</button>
+      </form>
     </div>
   </div>
 
@@ -109,7 +113,10 @@
       <img src="#" class="element__image" alt="Название места">
       <div class="element__info">
         <h2 class="element__place">Название места</h2>
-        <button class="element__like" aria-label="Нравится" type="button"></button>
+        <div class = "element__likes">
+          <button class="element__like" aria-label="Нравится" type="button"></button>
+          <span class="element__likes-number"></span>
+        </div>
       </div>
     </li>
   </template>

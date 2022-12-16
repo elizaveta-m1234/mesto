@@ -139,7 +139,7 @@ const popupProfile = new PopupWithForm('.popup_type_profile', (inputValues) => {
   popupProfile.renderLoading(true)
   api.editProfile(inputValues.name, inputValues.about)
     .then(res => {
-      userProfile.setUserInfo(inputValues);
+      userProfile.setUserInfo(res);
       popupProfile.close();
     })
   .finally(() => popupProfile.renderLoading(false))  

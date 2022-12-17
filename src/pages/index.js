@@ -43,7 +43,7 @@ api.getInitialCards()
   .then(cardList => {
     cardList.forEach(res => {
       const card = createCard({
-        place: res.name,
+        name: res.name,
         link: res.link,
         likes: res.likes,
         id: res._id,
@@ -60,9 +60,9 @@ Promise.all([ //в Promise.all передаем массив промисов к
   api.getInitialCards()
 ])
   .then(([res, item])=>{ //попадаем сюда когда оба промиса будут выполнены
-    userProfile.setUserInfo(res);
-    section.renderItems(item);// у нас есть все нужные данные, отрисовываем страницу
-    console.log(item);
+    userProfile.setUserInfo(res)
+    userId = res._id
+    section.renderItems(item)// у нас есть все нужные данные, отрисовываем страницу
   })
   .catch((err)=>{ //попадаем сюда если один из промисов завершаться ошибкой
     console.log(err);
@@ -70,7 +70,7 @@ Promise.all([ //в Promise.all передаем массив промисов к
 
 /*Функция создания карточки (переделываем после рефакторинга и теперь с учетом апи)*/
 const createCard = (item) => {
-  const card = new Card(item, '.card', (place, link) => {
+  const card = new Card({ userId: userId }, item, '.card', (place, link) => {
     //handleCardClick "ушла" в PopupWithImage, вытаскиваем метод из экземпляра класса
     popupPicture.open(place, link);
   },
@@ -122,14 +122,7 @@ const popupEntry = new PopupWithForm('.popup_type_entry', (cardData) => {
   popupEntry.renderLoading(true)
   api.addCard(cardData.place, cardData.link)
     .then(res => {
-      const card = createCard({
-        link: res.link,
-        place: res.name,
-        likes: res.likes,
-        id: res._id,
-        userId: userId,
-        ownerId: res.owner._id
-      });
+      const card = createCard(res);
     section.addItem(card);
     popupEntry.close();
     })

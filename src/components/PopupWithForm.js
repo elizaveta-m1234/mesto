@@ -1,9 +1,10 @@
 import { Popup } from "./Popup.js";
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, handleFormSubmit) { //принимает колбэк сабмита формы
+  constructor(popupSelector, handleFormSubmit, buttonText) { //принимает колбэк сабмита формы
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
+    this._buttonText = buttonText;
     //формы и инпуты
     this._form = this._popup.querySelector('.popup__form');
     this._inputList = this._form.querySelectorAll('.popup__input');
@@ -32,7 +33,6 @@ export class PopupWithForm extends Popup {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      this.close();
     })
   }
 
@@ -45,9 +45,8 @@ export class PopupWithForm extends Popup {
   renderLoading(isLoading) {
     if (isLoading) {
       this._submitBtn.textContent = 'Сохранение...'
-      //console.log('Сохранение...') -- не успеваю увидеть изменение кнопки, пусть будет для теста
     } else {
-      this._submitBtn.textContent = 'Сохранить'
+      this._submitBtn.textContent = this._buttonText;
     }
   }
 }

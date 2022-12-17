@@ -30,12 +30,13 @@ const avatarFormValidator = new FormValidator(validationConfig, popupAvatarEleme
 let userId
 
 //принимаем имя и информацию
-api.getProfile()
+/*api.getProfile()
   .then(res => {
     userProfile.setUserInfo(res)
 
     userId = res._id
   })
+  .catch((err) => console.log(err))
 
 //принимаем карточки
 api.getInitialCards()
@@ -52,6 +53,20 @@ api.getInitialCards()
       section.addItem(card)
     });
   })
+  .catch((err) => console.log(err))*/
+
+Promise.all([ //в Promise.all передаем массив промисов которые нужно выполнить
+  api.getProfile(),
+  api.getInitialCards()
+])
+  .then(([res, item])=>{ //попадаем сюда когда оба промиса будут выполнены
+    userProfile.setUserInfo(res);
+    section.renderItems(item);// у нас есть все нужные данные, отрисовываем страницу
+    console.log(item);
+  })
+  .catch((err)=>{ //попадаем сюда если один из промисов завершаться ошибкой
+    console.log(err);
+  })
 
 /*Функция создания карточки (переделываем после рефакторинга и теперь с учетом апи)*/
 const createCard = (item) => {
@@ -64,9 +79,10 @@ const createCard = (item) => {
       popupDelete.changeSubmitHandler(() => {
         api.deleteCard(_id)
           .then(res => {
-            card.deleteCard()
-            popupDelete.close()
+            card.deleteCard(_id);
+            popupDelete.close();
           })
+          .catch((err) => console.log(err))
       });
     },
     (_id) => {
@@ -75,11 +91,13 @@ const createCard = (item) => {
           .then(res => {
             card.setLikes(res.likes)
           })
+          .catch((err) => console.log(err))
       } else {
         api.addLike(_id)
           .then(res => {
             card.setLikes(res.likes)
           })
+          .catch((err) => console.log(err))
       }
     },
   );
@@ -89,7 +107,6 @@ const createCard = (item) => {
 /*Создаем секцию и карточки, см. подсказку от ст. студента в Слаке*/
 // и обновим функцию передаваемую в конструктор
 const section = new Section({
-  items: [],
   renderer: (item) => {
     const card = createCard(item);
     section.addItem(card);
@@ -115,10 +132,10 @@ const popupEntry = new PopupWithForm('.popup_type_entry', (cardData) => {
       });
     section.addItem(card);
     popupEntry.close();
-    addFormValidator.disableButton();
     })
+    .catch((err) => console.log(err))
     .finally(() => popupEntry.renderLoading(false))
-});
+}, 'Создать');
 
 popupEntry.setEventListeners();
 
@@ -142,8 +159,9 @@ const popupProfile = new PopupWithForm('.popup_type_profile', (inputValues) => {
       userProfile.setUserInfo(res);
       popupProfile.close();
     })
-  .finally(() => popupProfile.renderLoading(false))  
-})
+    .catch((err) => console.log(err))
+    .finally(() => popupProfile.renderLoading(false))  
+}, 'Сохранить')
 
 popupProfile.setEventListeners();
 
@@ -152,10 +170,12 @@ const popupAvatar = new PopupWithForm('.popup_type_avatar', ({ link }) => {
   popupAvatar.renderLoading(true)
   api.editAvatar(link)
     .then(res => {
-      userProfile.setUserInfo(res)
+      userProfile.setUserInfo(res);
+      popupAvatar.close();
     })
+    .catch((err) => console.log(err))
     .finally(() => popupAvatar.renderLoading(false)) 
-})
+}, 'Сохранить')
 
 popupAvatar.setEventListeners();
 

@@ -1,7 +1,7 @@
 export class Card {
   constructor(cardData, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick) {
     this._cardData = cardData;
-    this._place = cardData.place;
+    this._place = cardData.name;
     this._link = cardData.link;
     this._likes = cardData.likes;
     this._id = cardData.id;
@@ -52,11 +52,8 @@ export class Card {
 
   setLikes(newLikes) {
     this._likes = newLikes;
+    this._likeCountElement.textContent = this._likes.length;
 
-    const likeCountElement = this._element.querySelector('.element__likes-number');
-    likeCountElement.textContent = this._likes.length;
-
-    const userLikedCard = this._likes.find(user => user._id === this._userId);
     if (this.isLiked()) {
       this._likeCard();
     } else {
@@ -71,6 +68,7 @@ export class Card {
     this._cardPlace = this._element.querySelector('.element__place');
     this._cardLike = this._element.querySelector('.element__like');
     this._cardDelete = this._element.querySelector('.element__delete');
+    this._likeCountElement = this._element.querySelector('.element__likes-number');
 
     this._cardPlace.textContent = this._place;
     this._cardImage.src = this._link;
@@ -80,7 +78,7 @@ export class Card {
     this.setLikes(this._likes);
 
     if (this._ownerId !== this._userId) {
-      this._cardDelete.style.display = 'none';
+      this._cardDelete.classList.add('element__delete_invisible');
       this._cardDelete = null;
     }
 
